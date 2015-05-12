@@ -8,6 +8,10 @@ namespace Hudl.FFmpeg.Filters.BaseTypes
     /// </summary>
     public abstract class BaseFilter : IFilter
     {
+        protected BaseFilter()
+        {
+        }
+
         protected BaseFilter(string type, int maxInputs)
         {
             Type = type;

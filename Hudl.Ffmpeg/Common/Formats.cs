@@ -69,7 +69,7 @@ namespace Hudl.FFmpeg.Common
             return Library(library.ToString());
         }
 
-        public static string EnumValue<TValue>(TValue enumValue, bool convertIdentifiers = false)
+        public static string EnumValue(object enumValue, bool convertIdentifiers = false)
         {
             var enumString = enumValue.ToString().ToLower();
             if (convertIdentifiers && enumString.IndexOf(EnumSlashIdentifier, StringComparison.Ordinal) != -1)

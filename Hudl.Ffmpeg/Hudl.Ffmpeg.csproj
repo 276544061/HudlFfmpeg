@@ -61,8 +61,15 @@
     <Compile Include="BaseTypes\FfmpegProcessingException.cs" />
     <Compile Include="Command\CommandHelper.cs" />
     <Compile Include="Command\FFprobeCommand.cs" />
+    <Compile Include="Command\Serializer\FilterSerializer.cs" />
     <Compile Include="Common\FFmpegFraction.cs" />
     <Compile Include="Common\FFmpegStreamTypes.cs" />
+    <Compile Include="Filters\Attributes\BaseTypes\LogicalOperators.cs" />
+    <Compile Include="Filters\Attributes\FilterAttribute.cs" />
+    <Compile Include="Filters\Attributes\FilterFormatAttribute.cs" />
+    <Compile Include="Filters\Attributes\FilterValidateAttribute.cs" />
+    <Compile Include="Filters\Attributes\FilterParameterAttribute.cs" />
+    <Compile Include="Filters\Formatters\EnumFormatter.cs" />
     <Compile Include="Metadata\Ffprobe\BaseTypes\FFprobeCodecTypes.cs" />
     <Compile Include="Metadata\Ffprobe\BaseTypes\FFprobeObject.cs" />
     <Compile Include="Metadata\Ffprobe\BaseTypes\Models\FFprobeResultContainer.cs" />
@@ -249,6 +256,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

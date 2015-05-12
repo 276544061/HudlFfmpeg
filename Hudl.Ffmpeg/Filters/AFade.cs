@@ -11,13 +11,11 @@ namespace Hudl.FFmpeg.Filters
     /// Audio filter that applies a fade in or out effect to the audio stream
     /// </summary>
     [ForStream(Type=typeof(AudioStream))]
+    [Filter(Name="afade", MaxInputs=1)]
     public class AFade : BaseFilter
     {
-        private const int FilterMaxInputs = 1;
-        private const string FilterType = "afade";
-
         public AFade()
-            : base(FilterType, FilterMaxInputs)
+            : base()
         {
         }
 
@@ -48,71 +46,30 @@ namespace Hudl.FFmpeg.Filters
             CurveType = curveType; 
         }
 
-        public FadeTransitionType TransitionType { get; set; }
+        [FilterParameter("t")]
+        [FilterFormat(typeof(EnumFormatter))]
+        [FilterValidate(LogicalOperators.NEq, FadeTransitionType.In)]
+        public FadeTransitionType? TransitionType { get; set; }
 
-        public FadeCurveType CurveType { get; set; }
+        [FilterParameter("curve")]
+        [FilterFormat(typeof(EnumFormatter))]
+        [FilterValidate(LogicalOperators.NEq, FadeCurveType.Tri)]
+        public FadeCurveType? CurveType { get; set; }
 
+        [FilterParameter("ss")]
+        [FilterValidate(LogicalOperators.Gte, 0D)]
         public double? StartSample { get; set; }
-
+        
+        [FilterParameter("ns")]
+        [FilterValidate(LogicalOperators.Gte, 0D)]
         public double? NumberOfSamples { get; set; }
 
+        [FilterParameter("st")]
+        [FilterValidate(LogicalOperators.Gte, 0D)]
         public double? StartTime { get; set; }
 
+        [FilterParameter("d")]
+        [FilterValidate(LogicalOperators.Gte, 0D)]
         public double? Duration { get; set; }
-
-        public override void Validate()
-        {
-            if (StartSample.HasValue && StartSample <= 0)
-            {
-                throw new InvalidOperationException("Start Sample of the Audio Fade must be greater than zero.");
-            }
-
-            if (NumberOfSamples.HasValue && NumberOfSamples <= 0)
-            {
-                throw new InvalidOperationException("Number Of Samples of the Audio Fade must be greater than zero.");
-            }
-
-            if (StartTime.HasValue && StartTime <= 0)
-            {
-                throw new InvalidOperationException("StartTime of the Audio Fade must be greater than zero.");
-            }
-
-            if (Duration.HasValue && Duration <= 0)
-            {
-                throw new InvalidOperationException("Duration of the Audio Fade must be greater than zero.");
-            }
-        }
-
-        public override string ToString()
-        {
-            var filterParameters = new StringBuilder(100);
-
-            if (TransitionType != FadeTransitionType.In)
-            {
-                FilterUtility.ConcatenateParameter(filterParameters, "t", Formats.EnumValue(TransitionType));
-            }
-
-            if (StartSample.HasValue)
-            {
-                FilterUtility.ConcatenateParameter(filterParameters, "ss", StartSample.GetValueOrDefault());
-            }
-
-            if (NumberOfSamples.HasValue)
-            {
-                FilterUtility.ConcatenateParameter(filterParameters, "ns", NumberOfSamples.GetValueOrDefault());
-            }
-
-            if (StartTime.HasValue)
-            {
-                FilterUtility.ConcatenateParameter(filterParameters, "st", StartTime.GetValueOrDefault());
-            }
-
-            if (Duration.HasValue)
-            {
-                FilterUtility.ConcatenateParameter(filterParameters, "d", Duration.GetValueOrDefault());
-            }
-
-            return FilterUtility.JoinTypeAndParameters(this, filterParameters);
-        }
     }
 }

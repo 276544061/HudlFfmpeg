@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Hudl.FFmpeg.Filters.BaseTypes
+namespace Hudl.FFmpeg.Filters.Attributes
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public class FilterParameterAttribute : Attribute
@@ -14,5 +11,9 @@ namespace Hudl.FFmpeg.Filters.BaseTypes
         }
 
         public string Name { get; set; }
+
+        public Type Validator { get; set; }
+
+        public Type Formatter { get; set; } 
     }
 }

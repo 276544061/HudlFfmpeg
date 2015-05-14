@@ -67,8 +67,6 @@
     <Compile Include="Common\FFmpegStreamTypes.cs" />
     <Compile Include="Filters\Attributes\BaseTypes\LogicalOperators.cs" />
     <Compile Include="Filters\Attributes\FilterAttribute.cs" />
-    <Compile Include="Filters\Attributes\FilterFormatAttribute.cs" />
-    <Compile Include="Filters\Attributes\FilterValidateAttribute.cs" />
     <Compile Include="Filters\Attributes\FilterParameterAttribute.cs" />
     <Compile Include="Filters\Formatters\EnumFormatter.cs" />
     <Compile Include="Metadata\Ffprobe\BaseTypes\FFprobeCodecTypes.cs" />
